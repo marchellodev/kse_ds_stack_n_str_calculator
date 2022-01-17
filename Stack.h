@@ -3,7 +3,7 @@
 class Stack {
 private:
     int *arr;
-    int size = 2;
+    int size = 10;
     int pointer = 0;
 
 public:

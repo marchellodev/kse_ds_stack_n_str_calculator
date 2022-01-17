@@ -6,17 +6,18 @@ void Stack::push(int el) {
 
     // resizing the array
     if (pointer >= size) {
-        this->size = this->size * 2;
-        int *arr2 = new int[size];
+        int newSize = this->size * 2;
+        int *arr2 = new int[newSize];
 
         memcpy(arr2, this->arr, sizeof(int) * this->size);
+        this->size = newSize;
 
 //        for (int i = 0; i <= pointer; i++) {
 //            arr2[i] = this->arr[i];
 //        }
 
         this->arr = arr2;
-//        std::cout << "Resizing for " << el << " " << pointer << " " << size << std::endl;
+        std::cout << "Resizing for " << el << " " << pointer << " " << size << std::endl;
     }
 
     this->arr[pointer] = el;
