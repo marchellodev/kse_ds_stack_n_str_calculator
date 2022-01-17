@@ -2,7 +2,8 @@
 #include <cstring>
 #include "Stack.h"
 
-void Stack::push(int el) {
+template<typename T>
+void Stack<T>::push(T el) {
 
     // resizing the array
     if (pointer >= size) {
@@ -24,16 +25,19 @@ void Stack::push(int el) {
     pointer++;
 }
 
-int Stack::pop() {
+template<typename T>
+T Stack<T>::pop() {
     this->pointer--;
 
     return this->arr[pointer];
 }
 
-Stack::Stack() {
+template<typename T>
+Stack<T>::Stack() {
     this->arr = new int[size];
 }
 
-Stack::~Stack() {
+template<typename T>
+Stack<T>::~Stack() {
     delete[] this->arr;
 }
