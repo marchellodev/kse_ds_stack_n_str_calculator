@@ -6,9 +6,9 @@ private:
     int size = 2;
     int pointer = 0;
 
-
 public:
     Stack();
+    ~Stack();
 
     void push(int el);
 
