@@ -1,34 +1,32 @@
 #include <iostream>
 #include <vector>
 
-#include "Stack.h"
+#include "lib/Stack.h"
+#include "tokenization.cpp"
 
 using namespace std;
 
+int calculate(string str) {
+    return 10;
+}
+
+
 int main() {
-    Stack<int> stack{};
 
-//    for(int i =0; i < 100000; i++){
-//        for(int j =0; j < 100000; j++) {
-//            stack.push(20);
-//            stack.push(30);
-//            stack.push(40);
-//            stack.push(50);
-//            stack.push(60);
-//        }
-//    }
+    while (true) {
+        string str;
+        cout << "> ";
+        cin >> str;
 
-    stack.push(20);
-    stack.push(30);
-    stack.push(40);
-    stack.push(50);
-    stack.push(60);
+//        int result = calculate(str);
 
-    cout << stack.pop() << endl;
-    cout << stack.pop() << endl;
-    cout << stack.pop() << endl;
-    cout << stack.pop() << endl;
-    cout << stack.pop() << endl;
+//        cout << "> " << result << endl;
+        cout << "> " << Token(str[0]).type << endl;
+        cout << "> " << Token(str[0]).value.value_or(-1) << endl;
+
+        cout << endl;
+    }
+
 
     return 0;
 }
