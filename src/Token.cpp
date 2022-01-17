@@ -2,6 +2,7 @@
 #include <string>
 #include <stdexcept>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -22,9 +23,11 @@ public:
     TokenType type;
     optional<int> value;
 
+    Token();
+
     Token(TokenType type, optional<int> value) : type(type), value(value) {}
 
-    Token(char c) {
+    Token(const char c) {
         type = None;
 
         switch (c) {
@@ -48,22 +51,17 @@ public:
                 break;
         }
 
-        int val =  c - '0';
-        if(val >= 0 && val <= 9){
+        int val = c - '0';
+        if (val >= 0 && val <= 9) {
             type = Value;
             value = val;
         }
 
-        if(type == None){
+        if (type == None) {
             throw std::invalid_argument("unknown value");
         }
     }
 
+
+
 };
-
-//Token* tokenify(string str){
-//    for(char& c : str) {
-//
-//    }
-//}
-
