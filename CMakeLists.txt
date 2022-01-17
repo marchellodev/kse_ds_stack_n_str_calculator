@@ -4,4 +4,3 @@ project(kse_stack)
 set(CMAKE_CXX_STANDARD 23)
 
 add_executable(kse_stack main.cpp Stack.cpp Stack.h)
-add_executable(kse_stack2 test.cpp)

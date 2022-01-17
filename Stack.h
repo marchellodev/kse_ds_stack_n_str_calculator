@@ -2,8 +2,15 @@
 
 class Stack {
 private:
-    arr[] array
+    int *arr;
+    int size = 2;
+    int pointer = 0;
+
+
 public:
+    Stack();
+
     void push(int el);
+
     int pop();
 };
