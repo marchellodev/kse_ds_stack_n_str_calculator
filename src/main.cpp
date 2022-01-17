@@ -7,29 +7,29 @@
 using namespace std;
 
 
-vector<Token> tokenify(string str) {
+vector<Token> tokenify(const string &str) {
     vector<Token> result;
 
-    // buffer containing temporary data
+    // buffer for temporary data
     vector<Token> numBuffer;
 
-    for (char &c: str) {
+    for (char c: str) {
+        if(c == ' '){
+            continue;
+        }
+
         auto token = Token(c);
 
         // if prev value was a number
         if (!numBuffer.empty()) {
-
             if (token.type == Value) {
                 // if current value is a number, add it to the buffer
                 numBuffer.push_back(token);
+                continue;
             } else {
-                // if not, combine the buffer into one token
-                // FIXME: see above
-                cout << "FIXME" << endl;
-//                result.push_back(numBuffer);
+                result.push_back(Token::combineNumericTokens(numBuffer));
+                numBuffer.clear();
             }
-
-            numBuffer.clear();
         }
 
         if (token.type == Value) {
@@ -38,24 +38,24 @@ vector<Token> tokenify(string str) {
         }
 
         result.push_back(token);
-
-        // for debug purposes
-        cout << token.type << "| " << token.value.value_or(-1) << " - " << c << endl;
-
-//        cout << c << endl;
-
     }
+
 
     if (!numBuffer.empty()) {
-        cout << "FIXME" << endl;
+        result.push_back(Token::combineNumericTokens(numBuffer));
     }
-
 
     return result;
 }
 
-int calculate(string str) {
-    return 10;
+int calculate(const string &str) {
+    auto tokens = tokenify(str);
+
+    for (Token t: tokens) {
+        cout << t.type << " | " << t.value.value_or(-1) << endl;
+    }
+
+    return 0;
 }
 
 
@@ -64,14 +64,17 @@ int main() {
     while (true) {
         string str;
         cout << "> ";
-        cin >> str;
 
-//        int result = calculate(str);
+        getline(cin, str);
 
-//        cout << "> " << result << endl;
+        int result = calculate(str);
+
+        cout << "> " << result << endl;
+
+
 //        cout << "> " << Token(str[0]).type << endl;
 //        cout << "> " << Token(str[0]).value.value_or(-1) << endl;
-        cout << tokenify(str).size() << endl;
+//        cout << tokenify(str).size() << endl;
 
         cout << endl;
     }

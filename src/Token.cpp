@@ -63,5 +63,16 @@ public:
     }
 
 
+    static Token combineNumericTokens(const vector<Token> &tokens) {
+        int power = 1;
+        int result = 0;
+        for (int i = tokens.size() - 1; i >= 0; i--) {
+//            cout << tokens[i].value.value_or(-1) << endl;
+            result += tokens[i].value.value() * power;
+            power *= 10;
+        }
+
+        return {Value, result};
+    }
 
 };
