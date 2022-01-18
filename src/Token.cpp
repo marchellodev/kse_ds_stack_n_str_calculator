@@ -24,6 +24,9 @@ enum TokenType {
     ParenthesisClose,
 
     // 6
+    OperatorPower,
+
+    // 7
     Value,
     None,
 };
@@ -62,6 +65,8 @@ public:
             case ')':
                 type = ParenthesisClose;
                 break;
+            case '^':
+                type = OperatorPower;
         }
 
         int val = c - '0';

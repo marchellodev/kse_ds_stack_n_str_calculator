@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <cmath>
 
 #include "lib/Stack.h"
 #include "Token.cpp"
@@ -23,6 +24,10 @@ int tokenPriority(const Token t) {
         return 2;
     }
 
+    if(t.type == OperatorPower){
+        return 3;
+    }
+
     throw invalid_argument("not applicable");
 }
 
@@ -42,6 +47,10 @@ int performOperation(int val1, int val2, TokenType operation){
 
     if(operation == OperatorDivide){
         return val1 / val2;
+    }
+
+    if(operation == OperatorPower){
+        return pow(val1, val2);;
     }
 
     throw invalid_argument("not applicable");
@@ -138,7 +147,6 @@ vector<Token> shuntingYardOrdering(const vector<Token> tokens) {
             queue.push_back(prev);
             while (stack.canPop()) {
                 auto pop = stack.pop();
-                //
                 if(pop.type == ParenthesisOpen || tokenPriority(t) > tokenPriority(pop)){
                     stack.push(pop);
                     break;
