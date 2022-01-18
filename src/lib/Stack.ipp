@@ -13,12 +13,7 @@ void Stack<T>::push(T el) {
         memcpy(arr2, this->arr, sizeof(T) * this->size);
         this->size = newSize;
 
-//        for (int i = 0; i <= pointer; i++) {
-//            arr2[i] = this->arr[i];
-//        }
-
         this->arr = arr2;
-//        std::cout << "Resizing for " << el << " " << pointer << " " << size << std::endl;
     }
 
     this->arr[pointer] = el;

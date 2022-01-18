@@ -13,9 +13,7 @@ public:
     ~Stack();
 
     void push(T el);
-
     T pop();
-
     bool canPop();
 };
 
