@@ -10,6 +10,11 @@ using namespace std;
 // * / = 2
 // todo move into the enum
 int tokenPriority(const Token t) {
+
+    if(t.type == ParenthesisOpen || t.type == ParenthesisClose){
+        return 0;
+    }
+
     if (t.type == OperatorPlus || t.type == OperatorMinus) {
         return 1;
     }
@@ -94,9 +99,27 @@ vector<Token> shuntingYardOrdering(const vector<Token> tokens) {
             continue;
         }
 
+        if(t.type == ParenthesisOpen){
+            stack.push(t);
+            continue;
+        }
+
         // if the stack is empty
         if(!stack.canPop()){
             stack.push(t);
+            continue;
+        }
+
+        if (t.type == ParenthesisClose){
+            while(stack.canPop()){
+                auto tt = stack.pop();
+
+                if(tt.type == ParenthesisOpen){
+                    break;
+                }
+
+                queue.push_back(tt);
+            }
             continue;
         }
 
@@ -114,6 +137,13 @@ vector<Token> shuntingYardOrdering(const vector<Token> tokens) {
             // add operator to the stack
             queue.push_back(prev);
             while (stack.canPop()) {
+                auto pop = stack.pop();
+                //
+                if(pop.type == ParenthesisOpen || tokenPriority(t) > tokenPriority(pop)){
+                    stack.push(pop);
+                    break;
+                    //or continue
+                }
                 queue.push_back(stack.pop());
             }
 
