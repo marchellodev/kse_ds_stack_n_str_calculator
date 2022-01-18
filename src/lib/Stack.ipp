@@ -4,7 +4,6 @@
 
 template<typename T>
 void Stack<T>::push(T el) {
-
     // resizing the array
     if (pointer >= size) {
         int newSize = this->size * 2;
