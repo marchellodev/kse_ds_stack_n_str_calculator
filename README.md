@@ -20,3 +20,4 @@ make
 
 ## TO-DO
 - [ ] Use custom data structure instead of `vector<>` for lists
+- [ ] Define `Queue` and use it instead of `vector<Token>` for the Shunting-yard algorithm

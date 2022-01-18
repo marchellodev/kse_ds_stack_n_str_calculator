@@ -15,6 +15,8 @@ public:
     void push(T el);
 
     T pop();
+
+    bool canPop();
 };
 
 #include "Stack.ipp"

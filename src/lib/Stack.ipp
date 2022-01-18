@@ -8,9 +8,9 @@ void Stack<T>::push(T el) {
     // resizing the array
     if (pointer >= size) {
         int newSize = this->size * 2;
-        int *arr2 = new int[newSize];
+        T *arr2 = new T[newSize];
 
-        memcpy(arr2, this->arr, sizeof(int) * this->size);
+        memcpy(arr2, this->arr, sizeof(T) * this->size);
         this->size = newSize;
 
 //        for (int i = 0; i <= pointer; i++) {
@@ -18,7 +18,7 @@ void Stack<T>::push(T el) {
 //        }
 
         this->arr = arr2;
-        std::cout << "Resizing for " << el << " " << pointer << " " << size << std::endl;
+//        std::cout << "Resizing for " << el << " " << pointer << " " << size << std::endl;
     }
 
     this->arr[pointer] = el;
@@ -34,10 +34,15 @@ T Stack<T>::pop() {
 
 template<typename T>
 Stack<T>::Stack() {
-    this->arr = new int[size];
+    this->arr = new T[size];
 }
 
 template<typename T>
 Stack<T>::~Stack() {
     delete[] this->arr;
+}
+
+template<typename T>
+bool Stack<T>::canPop() {
+    return pointer != 0;
 }

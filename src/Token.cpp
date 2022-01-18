@@ -1,21 +1,34 @@
 #include <optional>
-#include <string>
 #include <stdexcept>
-#include <iostream>
 #include <vector>
 
 using namespace std;
 
 enum TokenType {
+    // 0
     OperatorMinus,
+
+    // 1
     OperatorPlus,
+
+    // 2
     OperatorMultiply,
+
+    // 3
     OperatorDivide,
+
+    // 4
     ParenthesisOpen,
+
+    // 5
     ParenthesisClose,
+
+    // 6
     Value,
     None,
 };
+
+
 
 
 class Token {
@@ -23,7 +36,7 @@ public:
     TokenType type;
     optional<int> value;
 
-    Token();
+    Token() = default;
 
     Token(TokenType type, optional<int> value) : type(type), value(value) {}
 
@@ -58,7 +71,7 @@ public:
         }
 
         if (type == None) {
-            throw std::invalid_argument("unknown value");
+            throw invalid_argument("unknown value");
         }
     }
 
