@@ -21,3 +21,12 @@ make
 ## TO-DO
 - [ ] Use custom data structure instead of `vector<>` for lists
 - [ ] Define `Queue` and use it instead of `vector<Token>` for the Shunting-yard algorithm
+
+
+## Tested on the following inputs:
+```shell
+2 + 3                             5
+2 * (3 + 7 - 1)                   18
+2 + (3 * (8 - 4))                 14
+3 + 4 * 2 / (1 - 5)^2^3           3
+```
