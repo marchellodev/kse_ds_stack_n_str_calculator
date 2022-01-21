@@ -3,6 +3,9 @@ project(kse_alg_1)
 
 set(CMAKE_CXX_STANDARD 23)
 
+#include_directories(/usr/include/readline)
+set(CMAKE_CXX_FLAGS "-L/usr/local/lib -I/usr/local/include -lreadline")
+
 # GOOGLE TEST
 include(FetchContent)
 FetchContent_Declare(
@@ -26,3 +29,4 @@ target_link_libraries(
 
 include(GoogleTest)
 gtest_discover_tests(testing)
+

@@ -4,6 +4,8 @@
 
 #include "lib/Stack.h"
 #include "Token.cpp"
+#include <readline/readline.h>
+#include <readline/history.h>
 
 using namespace std;
 
@@ -169,6 +171,8 @@ vector<Token> shuntingYardOrdering(const vector<Token> tokens) {
 
 int calculate(const string &str) {
     auto tokens = tokenify(str);
+    tokens.insert(tokens.begin(), Token('0'));
+
     tokens = shuntingYardOrdering(tokens);
 
 
@@ -199,9 +203,10 @@ int main() {
 
     while (true) {
         string str;
-        cout << "> ";
+//        cout << "> ";
 
-        getline(cin, str);
+//        str = readline("> ");
+        str = readline("> ");
 
         int result = calculate(str);
 
