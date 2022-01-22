@@ -7,7 +7,7 @@
 
 
 ## Running
-Note: The program uses Linux's readline ([for better editing experience](https://stackoverflow.com/a/7463298)), so it'll only work on Linux machines (maybe also MacOS, I am not sure). Please refore to commit [03a63c](https://github.com/marchellodev/kse_ds_stack_n_str_calculator/commit/03a63cd70a8fde953db16b783bda6e2cb50ca070) when trying to run this thing on an OS other than Linux.
+Note: The program uses Linux's readline ([for better editing experience](https://stackoverflow.com/a/7463298)), so it'll only work on Linux machines (maybe also MacOS, I am not sure). Please refere to commit [03a63c](https://github.com/marchellodev/kse_ds_stack_n_str_calculator/commit/03a63cd70a8fde953db16b783bda6e2cb50ca070) when trying to run this thing on an OS other than Linux.
 
 ```shell
 # Cleanup
