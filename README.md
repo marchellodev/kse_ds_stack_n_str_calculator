@@ -7,11 +7,11 @@
 
 
 ## Running
-Notice: The program uses GNU's readline, so it'll only work on Unix machines. Please use commit [03a63cd70a8fde953db16b783bda6e2cb50ca070](https://github.com/marchellodev/kse_ds_stack_n_str_calculator/commit/03a63cd70a8fde953db16b783bda6e2cb50ca070) on Windows.
+Note: The program uses Linux's readline ([for better editing experience](https://stackoverflow.com/a/7463298)), so it'll only work on Linux machines (maybe also MacOS, I am not sure). Please refore to commit [03a63c](https://github.com/marchellodev/kse_ds_stack_n_str_calculator/commit/03a63cd70a8fde953db16b783bda6e2cb50ca070) when trying to run this thing on an OS other than Linux.
 
 ```shell
 # Cleanup
-rm Makefile kse_alg_1 cmake_install.cmake CMakeFiles CMakeCache.txt -rf
+rm Makefile kse_alg_1 cmake_install.cmake CMakeFiles CMakeCache.txt cmake-build-debug bin CTestTestfile.cmake _deps testing lib testing\[* -rf
 
 # Building & Running
 cmake .
