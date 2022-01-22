@@ -18,7 +18,7 @@ int tokenPriority(const Token t) {
         return 0;
     }
 
-    if (t.type == OperatorPlus || t.type == OperatorMinus) {
+    if (t.type == OperatorPlus) {
         return 1;
     }
 
@@ -38,10 +38,10 @@ int performOperation(int val1, int val2, TokenType operation){
     if(operation == OperatorPlus){
         return val1+val2;
     }
-
-    if(operation == OperatorMinus){
-        return val1-val2;
-    }
+//
+//    if(operation == OperatorMinus){
+//        return val1-val2;
+//    }
 
     if(operation == OperatorMultiply){
         return val1*val2;
@@ -59,6 +59,33 @@ int performOperation(int val1, int val2, TokenType operation){
 }
 
 
+bool numBufferContainsMinusesButNoNumbersYet(vector<Token> buffer){
+    bool minuses = false;
+    bool numbers = false;
+
+    for(Token t : buffer){
+        if(t.type == ModifierMinus){
+            minuses = true;
+        }
+        if(t.type == Value){
+            numbers = true;
+        }
+    }
+
+    return minuses && !numbers;
+}
+
+
+bool numBufferContainsMinuses(vector<Token> buffer){
+
+    for(Token t : buffer){
+        if(t.type == ModifierMinus){
+            return true;
+        }
+    }
+
+    return false;
+}
 vector<Token> tokenify(const string &str) {
     vector<Token> result;
 
@@ -74,17 +101,25 @@ vector<Token> tokenify(const string &str) {
 
         // if prev value was a number
         if (!numBuffer.empty()) {
-            if (token.type == Value) {
+            // dangerous
+            // if numBuffer contains minuses, but no numbers yet
+            if (token.type == Value || (token.type == ModifierMinus && numBufferContainsMinusesButNoNumbersYet(numBuffer))) {
                 // if current value is a number, add it to the buffer
                 numBuffer.push_back(token);
                 continue;
             } else {
-                result.push_back(Token::combineNumericTokens(numBuffer));
+                auto combined = Token::combineNumericTokens(numBuffer);
+
+                if(numBufferContainsMinuses(numBuffer)){
+                    // placing + before if negative value, so we can actually compute the value
+                    result.push_back(Token('+'));
+                }
+                result.push_back(combined);
                 numBuffer.clear();
             }
         }
 
-        if (token.type == Value) {
+        if (token.type == Value || token.type == ModifierMinus) {
             numBuffer.push_back(token);
             continue;
         }
@@ -94,6 +129,10 @@ vector<Token> tokenify(const string &str) {
 
 
     if (!numBuffer.empty()) {
+        if(numBufferContainsMinuses(numBuffer)){
+            // placing + before if negative value, so we can actually compute the value
+            result.push_back(Token('+'));
+        }
         result.push_back(Token::combineNumericTokens(numBuffer));
     }
 
@@ -171,7 +210,7 @@ vector<Token> shuntingYardOrdering(const vector<Token> tokens) {
 
 int calculate(const string &str) {
     auto tokens = tokenify(str);
-    tokens.insert(tokens.begin(), Token('0'));
+//    tokens.insert(tokens.begin(), Token('0'));
 
     tokens = shuntingYardOrdering(tokens);
 
@@ -223,3 +262,5 @@ int main() {
 
     return 0;
 }
+
+// TODO > 132 - -123

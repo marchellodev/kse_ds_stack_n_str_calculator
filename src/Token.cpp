@@ -6,7 +6,7 @@ using namespace std;
 
 enum TokenType {
     // 0
-    OperatorMinus,
+    ModifierMinus,
 
     // 1
     OperatorPlus,
@@ -48,7 +48,7 @@ public:
 
         switch (c) {
             case '-':
-                type = OperatorMinus;
+                type = ModifierMinus;
                 break;
             case '+':
                 type = OperatorPlus;
@@ -84,13 +84,20 @@ public:
     static Token combineNumericTokens(const vector<Token> &tokens) {
         int power = 1;
         int result = 0;
+        bool negative = false;
         for (int i = tokens.size() - 1; i >= 0; i--) {
+            if(tokens[i].type == ModifierMinus){
+                // not using true, since there can be multiple minuses (3 -- 2 = 5)
+                negative = !negative;
+                continue;
+            }
 //            cout << tokens[i].value.value_or(-1) << endl;
             result += tokens[i].value.value() * power;
             power *= 10;
         }
 
-        return {Value, result};
+
+        return {Value, negative ? 0-result : result };
     }
 
 };
